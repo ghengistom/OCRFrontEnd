@@ -3,8 +3,7 @@
   <head>
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
-    <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js'></script>
-      <script type='text/javascript' src='../public/javascripts/MVVM.js'></script>
+
   </head>
   <body>
     <h1><%= title %></h1>
@@ -14,33 +13,48 @@
 <p>First name: <strong data-bind="text: firstName"></strong></p>
 <p>Last name: <strong data-bind="text: lastName"></strong></p>
 
-<p>First name: <input data-bind="value: firstName" /></p>
-<p>Last name: <input data-bind="value: lastName" /></p>
+
+<p>OCRType: <input data-bind="value: OCRType" /></p>
+<p>Languages: <input data-bind="value: Languages" /></p>
+<p>RetainLineNumbering: <input data-bind="value: RetainLineNumbering" /></p>
+<p>PictureHandling: <input data-bind="value: PictureHandling" /></p>
+<p>Deskew: <input data-bind="value: Deskew" /></p>
+<p>DespeckleEnabled: <input data-bind="value: DespeckleEnabled" /></p>
+<p>Rotation: <input data-bind="value: Rotation" /></p>
+<p>PDFVersion: <input data-bind="value: PDFVersion" /></p>
+<p>Linearize: <input data-bind="value: Linearize" /></p>
+<p>MetadataAuthor: <input data-bind="value: MetadataAuthor" /></p>
+<p>MetadataKeywords: <input data-bind="value: MetadataKeywords" /></p>
+<p>MetadataSubject: <input data-bind="value: MetadataSubject" /></p>
+<p>MetadataTitle: <input data-bind="value: MetadataTitle" /></p>
+<p>CompForContents: <input data-bind="value: CompForContents" /></p>
+<p>CompForTiff: <input data-bind="value: CompForTiff" /></p>
+<p>UseFlate: <input data-bind="value: UseFlate" /></p>
+<p>UseJBIG2: <input data-bind="value: UseJBIG2" /></p>
+<p>UseJPEG2000: <input data-bind="value: UseJPEG2000" /></p>
+<p>UseLZWInsteadOfFlate: <input data-bind="value: UseLZWInsteadOfFlate" /></p>
+<p>UseMRC: <input data-bind="value: UseMRC" /></p>
+<p>SecurityUse: <input data-bind="value: SecurityUse" /></p>
+<p>SecurityEncryption: <input data-bind="value: SecurityEncryption" /></p>
+<p>SecurityOwnerPassword: <input data-bind="value: SecurityOwnerPassword" /></p>
+<p>SecurityUserPassword: <input data-bind="value: SecurityUserPassword" /></p>
+<p>SecurityCanPrint: <input data-bind="value: SecurityCanPrint" /></p>
+<p>SecurityCanEdit: <input data-bind="value: SecurityCanEdit" /></p>
+<p>SecurityCanAnnotate: <input data-bind="value: SecurityCanAnnotate" /></p>
+<p>SecurityCanFillInFormFields: <input data-bind="value: SecurityCanFillInFormFields" /></p>
+<p>SecurityCanMakeAccessible: <input data-bind="value: SecurityCanMakeAccessible" /></p>
+<p>SecurityCanAssemble: <input data-bind="value: SecurityCanAssemble" /></p>
+<p>SecurityCanPrintHiResolution: <input data-bind="value: SecurityCanPrintHiResolution" /></p>
+
+
+
 
 <p>Full name: <strong data-bind="text: fullName"></strong></p>
 
 <button data-bind="click: capitalizeLastName">Go caps</button>
 
-<script>
-  // This is a simple *viewmodel* - JavaScript that defines the data and behavior of your UI
-function AppViewModel() {
-    this.firstName = ko.observable("Bert");
-    this.lastName = ko.observable("Bertington");
 
-    this.fullName = ko.computed(function() {
-        return this.firstName() + " " + this.lastName();    
-    }, this);
-
-    this.capitalizeLastName = function() {
-        var currentVal = this.lastName();        // Read the current value
-        this.lastName(currentVal.toUpperCase()); // Write back a modified value
-    };    
-}
-
-// Activates knockout.js
-ko.applyBindings(new AppViewModel());
-</script>
-
-
+<script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js'></script>
+<script src='javascripts/MVVM.js'></script>
   </body>
 </html>
