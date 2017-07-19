@@ -40,6 +40,13 @@ function AppViewModel() {
 
 
 
+<<<<<<< HEAD
+=======
+
+
+
+  /*
+>>>>>>> 77976275cf43587858b3beeb5cd1beaa0717bc8e
     this.firstName = ko.observable("Bert");
     this.lastName = ko.observable("Bertington");
 
@@ -51,7 +58,11 @@ function AppViewModel() {
         var currentVal = this.lastName();        // Read the current value
         this.lastName(currentVal.toUpperCase()); // Write back a modified value
     };
+<<<<<<< HEAD
 
+=======
+    */
+>>>>>>> 77976275cf43587858b3beeb5cd1beaa0717bc8e
 }
 
 // Activates knockout.js

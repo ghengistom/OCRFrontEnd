@@ -16,13 +16,15 @@ router.get('/', function(req, res, next) {
 //Get token
 router.get('/token', function(req, res, next){
   //go to url and get the token.
-  res.render('token', {title:'OCR Token'});
+  //res.render('token', {title:'OCR Token'});
   request({
     uri: 'http://localhost:52525/api/Account/token'
   },
   function(error, response, body) {
     if(!error && response.statusCode == 200) {
-      console.log(body);
+    //  console.log(body);
+
+    res.send(body);
 
     }
   }
