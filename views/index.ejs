@@ -7,54 +7,244 @@
   </head>
   <body>
     <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-<!-- This is a *view* - HTML markup that defines the appearance of your UI -->
-
-<p>First name: <strong data-bind="text: firstName"></strong></p>
-<p>Last name: <strong data-bind="text: lastName"></strong></p>
-
-
-<p>OCRType: <input data-bind="value: OCRType" /></p>
-<p>Languages: <input data-bind="value: Languages" /></p>
-<p>RetainLineNumbering: <input data-bind="value: RetainLineNumbering" /></p>
-<p>PictureHandling: <input data-bind="value: PictureHandling" /></p>
-<p>Deskew: <input data-bind="value: Deskew" /></p>
-<p>DespeckleEnabled: <input data-bind="value: DespeckleEnabled" /></p>
-<p>Rotation: <input data-bind="value: Rotation" /></p>
-<p>PDFVersion: <input data-bind="value: PDFVersion" /></p>
-<p>Linearize: <input data-bind="value: Linearize" /></p>
-<p>MetadataAuthor: <input data-bind="value: MetadataAuthor" /></p>
-<p>MetadataKeywords: <input data-bind="value: MetadataKeywords" /></p>
-<p>MetadataSubject: <input data-bind="value: MetadataSubject" /></p>
-<p>MetadataTitle: <input data-bind="value: MetadataTitle" /></p>
-<p>CompForContents: <input data-bind="value: CompForContents" /></p>
-<p>CompForTiff: <input data-bind="value: CompForTiff" /></p>
-<p>UseFlate: <input data-bind="value: UseFlate" /></p>
-<p>UseJBIG2: <input data-bind="value: UseJBIG2" /></p>
-<p>UseJPEG2000: <input data-bind="value: UseJPEG2000" /></p>
-<p>UseLZWInsteadOfFlate: <input data-bind="value: UseLZWInsteadOfFlate" /></p>
-<p>UseMRC: <input data-bind="value: UseMRC" /></p>
-<p>SecurityUse: <input data-bind="value: SecurityUse" /></p>
-<p>SecurityEncryption: <input data-bind="value: SecurityEncryption" /></p>
-<p>SecurityOwnerPassword: <input data-bind="value: SecurityOwnerPassword" /></p>
-<p>SecurityUserPassword: <input data-bind="value: SecurityUserPassword" /></p>
-<p>SecurityCanPrint: <input data-bind="value: SecurityCanPrint" /></p>
-<p>SecurityCanEdit: <input data-bind="value: SecurityCanEdit" /></p>
-<p>SecurityCanAnnotate: <input data-bind="value: SecurityCanAnnotate" /></p>
-<p>SecurityCanFillInFormFields: <input data-bind="value: SecurityCanFillInFormFields" /></p>
-<p>SecurityCanMakeAccessible: <input data-bind="value: SecurityCanMakeAccessible" /></p>
-<p>SecurityCanAssemble: <input data-bind="value: SecurityCanAssemble" /></p>
-<p>SecurityCanPrintHiResolution: <input data-bind="value: SecurityCanPrintHiResolution" /></p>
 
 
 
+    <form name="uploadForm" method="POST" enctype="multipart/form-data" action="http://localhost:62625/api/OCR/Conversion">
+          <div>
+              <label>Input File</label>
+              <input name="InputFile" id="InputFile" type="file" />
+          </div>
+          <div>
+              <label>Output Filename</label>
+              <input name="OutputFile" id="OutputFile" type="text"/>
+          </div>
+          <div>
+              <label>OCR Type</label>
+              <select name="OCRType">
+                  <option value="0">ImageOnText PDF</option>
+                  <option value="1">Full OCR</option>
+              </select>
+          </div>
+          <div>
+              <label>Confidence</label>
+              <input type="radio" name="Confidence" value="1" />True
+              <input type="radio" name="Confidence" value="0" checked />False
+          </div>
+          <div>
+              <label>Confidence Threshold</label>
+              <input name="ThresholdErrors" id="ThresholdErrors" type="text"/> (0 - 100)
+          </div>
+          <div>
+              <label>Languages</label>
+              <input name="Languages" id="Languages" type="text" />
+          </div>
+          <div>
+              <label>Retain Line Numbering</label>
+              <input type="radio" name="RetainLineNumbering" value="1" />True
+              <input type="radio" name="RetainLineNumbering" value="0" checked/>False
+          </div>
+          <div>
+              <label>Picture Handling</label>
+              <select name="PictureHandling">
+                  <option value="0">None</option>
+                  <option value="1">Original DPI</option>
+                  <option value="2">DPI 72</option>
+                  <option value="3">DPI 100</option>
+                  <option value="4">DPI 150</option>
+                  <option value="5">DPI 200</option>
+                  <option value="6">DPI 300</option>
+              </select>
+          </div>
+          <div>
+              <label>Deskew</label>
+              <select name="Deskew">
+                  <option value="0">Disabled</option>
+                  <option value="1">Auto 2D</option>
+              </select>
+          </div>
+          <div>
+              <label>Despeckle Enabled</label>
+              <input type="radio" name="DespeckleEnabled" value="1" />True
+              <input type="radio" name="DespeckleEnabled" value="0" checked/>False
+          </div>
+          <div>
+              <label>Auto Rotation</label>
+              <input type="radio" name="Rotation" value="1" checked />True
+              <input type="radio" name="Rotation" value="0" />False
+          </div>
+          <div>
+              <label>Export Page Bookmarks</label>
+              <input type="radio" name="ExportPageBookmarks" value="1" checked />True
+              <input type="radio" name="ExportPageBookmarks" value="0" />False
+          </div>
+          <br/>
+          <div>
+              <label>PDF Output</label>
+              <input type="radio" name="OutputFormat" value="0" checked/>PDF (Use PDF Version)
+              <input type="radio" name="OutputFormat" value="1"/>PDFA (Use PDFA Compliance Level)
+          </div>
+          <div>
+              <label>PDF Version</label>
+              <select name="PDFVersion">
+                  <option value="-2">1.2</option>
+                  <option value="0">1.3</option>
+                  <option value="1">1.4</option>
+                  <option value="2">1.5</option>
+                  <option value="3">1.6</option>
+                  <option value="4">1.7</option>
+              </select>
+          </div>
+          <div>
+              <label>PDFA Compliance Level</label>
+              <select name="PDFAComplianceLevel">
+                  <option value="0">PDFA_1A</option>
+                  <option value="1">PDFA_1B</option>
+                  <option value="2">PDFA_2A</option>
+                  <option value="3">PDFA_2B</option>
+                  <option value="4">PDFA_2U</option>
+                  <option value="5">PDFA_3A</option>
+                  <option value="6">PDFA_3B</option>
+                  <option value="7">PDFA_3U</option>
+              </select>
+          </div>
+          <div>
+              <label>Title</label>
+              <input name="MetadataTitle" type="text" />
+          </div>
+          <div>
+              <label>Author</label>
+              <input name="MetadataAuthor" type="text" />
+          </div>
+          <div>
+              <label>Keywords</label>
+              <input name="MetadataKeywords" type="text" />
+          </div>
+          <div>
+              <label>Subject</label>
+              <input name="MetadataSubject" type="text" />
+          </div>
+          <div>
+              <label>Linearize</label>
+              <input type="radio" name="Linearize" value="1" />True
+              <input type="radio" name="Linearize" value="0" checked/>False
+          </div>
+          <div>
+              <label>Use compression for Text and Line Art</label>
+              <input type="radio" name="CompForContents" value="1" checked/>True
+              <input type="radio" name="CompForContents" value="0" />False
+          </div>
+          <div>
+              <label>Use compression for Embedded Files</label>
+              <input type="radio" name="CompForTTF" value="1" checked />True
+              <input type="radio" name="CompForTTF" value="0" />False
+          </div>
+          <div>
+              <label>Use Flate compression for content streams</label>
+              <input type="radio" name="UseFlate" value="1" checked />True
+              <input type="radio" name="UseFlate" value="0" />False
+          </div>
+          <div>
+              <label>Use JBIG2 compression for B/W images, otherwise it uses TIFF G4. JBIG2 can be used in PDF v1.5 or higher</label>
+              <input type="radio" name="UseJBIG2" value="1" checked />True
+              <input type="radio" name="UseJBIG2" value="0" />False
+          </div>
+          <div>
+              <label>Use JPEG2000 compression for color and grayscale images, otherwise it uses JPEG. JPEG2000 can be used in PDF v1.5 or higher</label>
+              <input type="radio" name="UseJPEG2000" value="1" checked />True
+              <input type="radio" name="UseJPEG2000" value="0" />False
+          </div>
+          <div>
+              <label>Use LZW compression. Set Flate to False to use LZW compression.</label>
+              <input type="radio" name="UseLZWInsteadOfFlate" value="1" />True
+              <input type="radio" name="UseLZWInsteadOfFlate" value="0" checked/>False
+          </div>
+          <div>
+              <label>Use MRC Compression</label>
+              <select name="UseMRC">
+                  <option value="0">Disabled</option>
+                  <option value="1">Minimal</option>
+                  <option value="2">Good</option>
+                  <option value="3">Lossless</option>
+              </select>
+          </div>
+          <br/>
+          <div>
+              <label>Enable Security</label>
+              <input type="checkbox" name="SecurityUse" value="1"/>
+          </div>
+          <div>
+              <label>Security Encryption</label>
+              <select name="SecurityEncryption">
+                  <option value="-1">None</option>
+                  <option value="2">Security40Bit</option>
+                  <option value="3">Security128Bit</option>
+                  <option value="4">AES128Bit</option>
+                  <option value="5">AES256Bit</option>
+              </select>
+          </div>
+          <div>
+              <label>Owner Password</label>
+              <input name="SecurityOwnerPassword" type="text" />
+          </div>
+          <div>
+              <label>User Password</label>
+              <input name="SecurityUserPassword" type="text" />
+          </div>
+          <div>
+              <label>Can Print</label>
+              <input type="radio" name="SecurityCanPrint" value="1" checked />True
+              <input type="radio" name="SecurityCanPrint" value="0" />False
+          </div>
+          <div>
+              <label>Can Edit</label>
+              <input type="radio" name="SecurityCanEdit" value="1" checked />True
+              <input type="radio" name="SecurityCanEdit" value="0" />False
+          </div>
+          <div>
+              <label>Can Copy</label>
+              <input type="radio" name="SecurityCanCopy" value="1" checked />True
+              <input type="radio" name="SecurityCanCopy" value="0" />False
+          </div>
+          <div>
+              <label>Can Annotate</label>
+              <input type="radio" name="SecurityCanAnnotate" value="1" checked />True
+              <input type="radio" name="SecurityCanAnnotate" value="0" />False
+          </div>
+          <div>
+              <label>Can Fill In Form Fields</label>
+              <input type="radio" name="SecurityCanFillInFormFields" value="1" checked />True
+              <input type="radio" name="SecurityCanFillInFormFields" value="0" />False
+          </div>
+          <div>
+              <label>Can extract text and graphics</label>
+              <input type="radio" name="SecurityCanMakeAccessible" value="1" checked />True
+              <input type="radio" name="SecurityCanMakeAccessible" value="0" />False
+          </div>
+          <div>
+              <label>Can Assemble</label>
+              <input type="radio" name="SecurityCanAssemble" value="1" checked />True
+              <input type="radio" name="SecurityCanAssemble" value="0" />False
+          </div>
+          <div>
+              <label>Can Print High Quality</label>
+              <input type="radio" name="SecurityCanPrintHiResolution" value="1" checked />True
+              <input type="radio" name="SecurityCanPrintHiResolution" value="0" />False
+          </div>
+          <div>
+              <input type="submit" value="Submit" id="Submit"/>
+          </div>
+      </form>
 
+<!--
 <p>Full name: <strong data-bind="text: fullName"></strong></p>
 
 <button data-bind="click: capitalizeLastName">Go caps</button>
-
+-->
 
 <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js'></script>
+
 <script src='javascripts/MVVM.js'></script>
+<script src='javascripts/index.js'></script>
   </body>
 </html>

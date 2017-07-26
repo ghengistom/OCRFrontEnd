@@ -1,6 +1,6 @@
 
 
-console.log("In MVVM.js");
+//console.log("In MVVM.js");
 
 // This is a simple *viewmodel* - JavaScript that defines the data and behavior of your UI
 function AppViewModel() {
@@ -37,33 +37,27 @@ function AppViewModel() {
   this.SecurityCanAssemble = ko.observable("0");
   this.SecurityCanPrintHiResolution = ko.observable("0");
 
-
-
-
-<<<<<<< HEAD
-=======
-
-
-
-  /*
->>>>>>> 77976275cf43587858b3beeb5cd1beaa0717bc8e
-    this.firstName = ko.observable("Bert");
-    this.lastName = ko.observable("Bertington");
-
-    this.fullName = ko.computed(function() {
-        return this.firstName() + " " + this.lastName();
-    }, this);
-
-    this.capitalizeLastName = function() {
-        var currentVal = this.lastName();        // Read the current value
-        this.lastName(currentVal.toUpperCase()); // Write back a modified value
-    };
-<<<<<<< HEAD
-
-=======
-    */
->>>>>>> 77976275cf43587858b3beeb5cd1beaa0717bc8e
 }
+
+var jsonData = ko.toJSON(AppViewModel);
+
+//alert(jsonData);
+
+
+document.getElementById("submit").addEventListener("click", function(){
+  //do the post to OCR server
+$.ajax({
+  url: '/',
+  type: 'POST',
+
+});
+
+
+});
+
+//btoa(USERNAME + ":" + PASSWORD)
+
+
 
 // Activates knockout.js
 ko.applyBindings(new AppViewModel());
